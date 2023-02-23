@@ -57,18 +57,6 @@ The following example task creates an API key on Palo Alto Cortex XSOAR, using t
     key: "71F9CAC0D57544C7C7DFB78BE50FC96A"
 ```
 
-## Contributing to this collection
-
-We welcome community contributions to this collection. If you find problems, please open an issue or create a PR against the [Cortex XSOAR collection repository](https://github.com/NVISOsecurity/cortex.xsoar). See [Contributing to Ansible-maintained collections](https://docs.ansible.com/ansible/devel/community/contributing_maintained_collections.html#contributing-maintained-collections) for complete details.
-
-See the [Ansible Community Guide](https://docs.ansible.com/ansible/latest/community/index.html) for details on contributing to Ansible.
-
-### Code of Conduct
-
-This collection follows the Ansible project's
-[Code of Conduct](https://docs.ansible.com/ansible/devel/community/code_of_conduct.html).
-Please read and familiarize yourself with this document.
-
 ## Release notes
 
 Release notes are available [here](https://github.com/NVISOsecurity/cortex.xsoar/blob/main/CHANGELOG.rst).
