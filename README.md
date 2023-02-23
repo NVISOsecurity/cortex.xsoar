@@ -44,17 +44,24 @@ collections:
 ### Using modules from the Cortex XSOAR collection in your playbooks
 
 You can call modules by their Fully Qualified Collection Namespace (FQCN), such as `cortex.xsoar.xsoar_api_key`.
-The following example task creates an API key on Palo Alto Cortex XSOAR, using the FQCN:
+The following example task creates an integration instance of Demisto REST API on Palo Alto Cortex XSOAR, using the FQCN:
 
 ```yaml
 ---
-- name: Create an API Key
-  cortex.xsoar.xsoar_api_key:
-    name: "API Key 1"
+- name: Create Demisto REST API integration instance
+  cortex.xsoar.xsoar_integration:
+    name: "Demisto REST API_instance"
+    brand: "Demisto REST API"
+    enabled: True
+    configuration:
+        url: "https://127.0.0.1"
+        insecure: True
+        apikey: "71F9CAC0D57544C7C7DFB78BE50FC96A"
+        proxy: True
     state: "present"
     url: "https://xsoar.org"
     api_key: "47A424BF668FD7BF0443184314104BC3"
-    key: "71F9CAC0D57544C7C7DFB78BE50FC96A"
+    validate_certs: False
 ```
 
 ## Release notes
