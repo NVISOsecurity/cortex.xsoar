@@ -1,0 +1,14 @@
+namespace: "cortex"
+name: "xsoar"
+description: "Ansible Collection to help automate the management of Palo Alto Cortex XSOAR"
+version: "1.0.0"
+readme: "README.md"
+authors:
+    - "Wouter Stinkens"
+license_file: LICENSE
+tags:
+    - cortex
+    - xsoar
+    - collection
+repository: "https://github.com/NVISOsecurity/cortex.xsoar"
+issues: "https://github.com/NVISOsecurity/cortex.xsoar/issues"
