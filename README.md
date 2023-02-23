@@ -22,7 +22,7 @@ cortex.xsoar.xsoar_integration|Create an integration instance in Palo Alto Corte
 cortex.xsoar.xsoar_job|Create a job in Palo Alto Cortex XSOAR
 cortex.xsoar.xsoar_preprocess_rule|Create a preprocess rule in Palo Alto Cortex XSOAR
 cortex.xsoar.xsoar_multi_tenant_account|Create an account in a multi-tenant Palo Alto Cortex XSOAR environment
-cortex.xsoar.xsoar_multi_tenant_sync_accounts|Synchronize content to all account in a multi-tenant Palo Alto Cortex XSOAR environment
+cortex.xsoar.xsoar_multi_tenant_sync_accounts|Synchronize content to all accounts in a multi-tenant Palo Alto Cortex XSOAR environment
 
 ## Installing this collection
 

@@ -15,4 +15,4 @@ New Modules
 - xsoar_job - Creat a job in Palo Alto Cortex XSOAR
 - xsoar_preprocess_rule - Create a preprocess rule in Palo Alto Cortex XSOAR
 - xsoar_multi_tenant_account - Create an account in a multi-tenant Palo Alto Cortex XSOAR environment
-- xsoar_multi_tenant_sync_accounts - Synchronize content to all account in a multi-tenant Palo Alto Cortex XSOAR environment
+- xsoar_multi_tenant_sync_accounts - Synchronize content to all accounts in a multi-tenant Palo Alto Cortex XSOAR environment
