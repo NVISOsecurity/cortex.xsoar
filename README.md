@@ -2,7 +2,7 @@
 
 The `cortex.xsoar` collection includes Ansible modules to help automate the management of Palo Alto Cortex XSOAR.
 
-This collection has been tested against Palo Alto Cortex XSOAR 6.10 (B187344).
+This collection has been tested against Palo Alto Cortex XSOAR 6.9.
 
 ## Ansible version compatibility
 
