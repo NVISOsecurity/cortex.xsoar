@@ -44,7 +44,7 @@ collections:
 ### Using modules from the Cortex XSOAR collection in your playbooks
 
 You can call modules by their Fully Qualified Collection Namespace (FQCN), such as `cortex.xsoar.xsoar_api_key`.
-The following example task creates and API key on Palo Alto Cortex XSOAR, using the FQCN:
+The following example task creates an API key on Palo Alto Cortex XSOAR, using the FQCN:
 
 ```yaml
 ---
