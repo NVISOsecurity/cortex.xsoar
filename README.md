@@ -18,7 +18,7 @@ PEP440 is the schema used to describe the versions of Ansible.
 Name | Description
 --- | ---
 cortex.xsoar.xsoar_api_key|Create an API Key in Palo Alto Cortex XSOAR
-cortex.xsoar.xsoar_integration]|Create an integration instance in Palo Alto Cortex XSOAR
+cortex.xsoar.xsoar_integration|Create an integration instance in Palo Alto Cortex XSOAR
 cortex.xsoar.xsoar_job|Create a job in Palo Alto Cortex XSOAR
 cortex.xsoar.xsoar_preprocess_rule|Create a preprocess rule in Palo Alto Cortex XSOAR
 cortex.xsoar.xsoar_multi_tenant_account|Create an account in a multi-tenant Palo Alto Cortex XSOAR environment
