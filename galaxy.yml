@@ -4,7 +4,7 @@ description: "Ansible Collection to help automate the management of Palo Alto Co
 version: "1.0.0"
 readme: "README.md"
 authors:
-    - "Wouter Stinkens"
+    - "Wouter Stinkens (@wstinkens)"
 license_file: LICENSE
 tags:
     - cortex
