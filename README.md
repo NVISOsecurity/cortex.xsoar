@@ -17,12 +17,13 @@ PEP440 is the schema used to describe the versions of Ansible.
 ### Modules
 Name | Description
 --- | ---
-cortex.xsoar.xsoar_api_key|Create an API Key in Palo Alto Cortex XSOAR
-cortex.xsoar.xsoar_integration|Create an integration instance in Palo Alto Cortex XSOAR
-cortex.xsoar.xsoar_job|Create a job in Palo Alto Cortex XSOAR
-cortex.xsoar.xsoar_preprocess_rule|Create a preprocess rule in Palo Alto Cortex XSOAR
-cortex.xsoar.xsoar_multi_tenant_account|Create an account in a multi-tenant Palo Alto Cortex XSOAR environment
-cortex.xsoar.xsoar_multi_tenant_sync_accounts|Synchronize content to all accounts in a multi-tenant Palo Alto Cortex XSOAR environment
+[cortex.xsoar.xsoar_api_key](https://github.com/NVISOsecurity/cortex.xsoar/blob/main/plugins/modules/xsoar_api_key.py#L13)|Create an API Key in Palo Alto Cortex XSOAR
+[cortex.xsoar.xsoar_integration](https://github.com/NVISOsecurity/cortex.xsoar/blob/main/plugins/modules/xsoar_integration.py#L13)|Create an integration instance in Palo Alto Cortex XSOAR
+[cortex.xsoar.xsoar_job](https://github.com/NVISOsecurity/cortex.xsoar/blob/main/plugins/modules/xsoar_job.py#L15)|Create a job in Palo Alto Cortex XSOAR
+[cortex.xsoar.xsoar_list](https://github.com/NVISOsecurity/cortex.xsoar/blob/main/plugins/modules/xsoar_list.py#L13)|Create a list in Palo Alto Cortex XSOAR
+[cortex.xsoar.xsoar_preprocess_rule](https://github.com/NVISOsecurity/cortex.xsoar/blob/main/plugins/modules/xsoar_preprocess_rule.py#L13)|Create a preprocess rule in Palo Alto Cortex XSOAR
+[cortex.xsoar.xsoar_multi_tenant_account](https://github.com/NVISOsecurity/cortex.xsoar/blob/main/plugins/modules/xsoar_multi_tenant_account.py#L13)|Create an account in a multi-tenant Palo Alto Cortex XSOAR environment
+[cortex.xsoar.xsoar_multi_tenant_sync_accounts](https://github.com/NVISOsecurity/cortex.xsoar/blob/main/plugins/modules/xsoar_multi_tenant_sync_accounts.py#L13)|Synchronize content to all accounts in a multi-tenant Palo Alto Cortex XSOAR environment
 
 ## Installing this collection
 
