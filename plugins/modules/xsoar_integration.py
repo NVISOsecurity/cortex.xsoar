@@ -194,7 +194,7 @@ class CortexXSOARIntegration:
                     or not len(config_items) == 1:
                 return False
 
-            if not config_items[0].get('type') == 4:
+            if not config_items[0].get('type') == 4 and not config_items[0].get('type') == 9:
                 if not config_items[0].get('value') == v:
                     return False
 

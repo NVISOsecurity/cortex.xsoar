@@ -4,6 +4,14 @@ Cortex XSOAR Collection Release Notes
 
 .. contents:: Topics
 
+v1.0.1
+======
+
+Bugfixes
+--------
+
+- xsoar_integration -  Fix password/credential check issue.
+
 v1.0.0
 ======
 
