@@ -83,7 +83,7 @@ EXAMPLES = r'''
     api_key: "47A424BF668FD7BF0443184314104BC3"
 
 # Synchronize content to an account in a Palo Alto Cortex XSOAR multi-tenant environment
-- name: Sync AbuseIPDB content pack to account
+- name: Sync AbuseIPDB content pack to accounts
   cortex.xsoar.xsoar_multi_tenant_sync_account:
     items:
       - AbuseIPDB
@@ -91,8 +91,6 @@ EXAMPLES = r'''
       - Account01
     url: "https://xsoar.org"
     api_key: "47A424BF668FD7BF0443184314104BC3"
-'''
-
 '''
 
 RETURN = r'''
