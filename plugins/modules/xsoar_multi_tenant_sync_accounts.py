@@ -96,7 +96,7 @@ class CortexXSOARSyncAll:
                          timeout=self.timeout)
             return 0, f"All Accounts synced in Palo Alto Cortex XSOAR", ""
         except Exception as e:
-            return 1, f"Failed to sync all Accounts", f"Error creating list: {str(e)}"
+            return 1, f"Failed to sync all Accounts", f"Error syncing accounts: {str(e)}"
 
 
 def run_module():

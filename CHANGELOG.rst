@@ -4,6 +4,14 @@ Cortex XSOAR Collection Release Notes
 
 .. contents:: Topics
 
+v1.1.0
+======
+
+New Modules
+-----------
+
+- xsoar_multi_tenant_sync_account - Synchronize content to accounts in a multi-tenant Palo Alto Cortex XSOAR environment
+
 v1.0.1
 ======
 

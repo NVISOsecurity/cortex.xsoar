@@ -123,7 +123,6 @@ EXAMPLES = r'''
     state: "present"
     url: "https://xsoar.org"
     api_key: "47A424BF668FD7BF0443184314104BC3"
-    key: "71F9CAC0D57544C7C7DFB78BE50FC96A"
     validate_certs: False
 
 # Create a Job in an account in a Palo Alto Cortex XSOAR multi-tenant environment
@@ -137,7 +136,6 @@ EXAMPLES = r'''
     account: "Client01"
     url: "https://xsoar.org"
     api_key: "47A424BF668FD7BF0443184314104BC3"
-    key: "71F9CAC0D57544C7C7DFB78BE50FC96A"
 
 # Remove a Job in Palo Alto Cortex XSOAR
 - name: Remove Job "Job01"

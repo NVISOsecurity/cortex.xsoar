@@ -24,6 +24,7 @@ Name | Description
 [cortex.xsoar.xsoar_preprocess_rule](https://github.com/NVISOsecurity/cortex.xsoar/blob/main/plugins/modules/xsoar_preprocess_rule.py#L13)|Create a preprocess rule in Palo Alto Cortex XSOAR
 [cortex.xsoar.xsoar_multi_tenant_account](https://github.com/NVISOsecurity/cortex.xsoar/blob/main/plugins/modules/xsoar_multi_tenant_account.py#L13)|Create an account in a multi-tenant Palo Alto Cortex XSOAR environment
 [cortex.xsoar.xsoar_multi_tenant_sync_accounts](https://github.com/NVISOsecurity/cortex.xsoar/blob/main/plugins/modules/xsoar_multi_tenant_sync_accounts.py#L13)|Synchronize content to all accounts in a multi-tenant Palo Alto Cortex XSOAR environment
+[cortex.xsoar.xsoar_multi_tenant_sync_account](https://github.com/NVISOsecurity/cortex.xsoar/blob/main/plugins/modules/xsoar_multi_tenant_sync_account.py#L13)|Synchronize content to accounts in a multi-tenant Palo Alto Cortex XSOAR environment
 
 ## Installing this collection
 
