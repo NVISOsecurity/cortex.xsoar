@@ -4,6 +4,14 @@ Cortex XSOAR Collection Release Notes
 
 .. contents:: Topics
 
+v1.1.2
+======
+
+- xsoar_multi_tenant_sync_account - Remove debug statements
+
+Bugfixes
+--------
+
 v1.1.1
 ======
 

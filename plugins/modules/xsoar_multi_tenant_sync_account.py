@@ -136,7 +136,6 @@ class CortexXSOARSyncAccount:
 
         if self.all_items is not True and self.accounts and isinstance(self.accounts, list) \
                 and self.items and isinstance(self.items, list):
-            print(f'accounts: {self.accounts}')
             for account in self.accounts:
                 account_items_to_sync = self.get_account_items_to_sync(account=account)
 
@@ -158,7 +157,6 @@ class CortexXSOARSyncAccount:
                                                                            account=account)
 
         if self.accounts_items_to_sync:
-            print(self.accounts_items_to_sync)
             return False
 
         return True
@@ -204,13 +202,11 @@ class CortexXSOARSyncAccount:
         else:
             try:
                 for k, v in self.accounts_items_to_sync.items():
-                    print(f'account: {k}')
                     url_suffix = f"account/content/sync/acc_{k}"
 
                     url = f'{self.base_url}/{url_suffix}'
 
                     json_data = json.dumps(v, ensure_ascii=False)
-                    print(json_data)
 
                     if not self.module.check_mode:
                         open_url(url, method="POST", headers=self.headers, data=json_data,
