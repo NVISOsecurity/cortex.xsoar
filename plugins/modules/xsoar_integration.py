@@ -234,7 +234,14 @@ class CortexXSOARIntegration:
                 return 1, f"Failed to update integration instance {self.name}", f"Error updating integration instance: {str(e)}"
 
         else:
-            configuration = [{'name': k, 'value': v} for k, v in self.configuration.items()]
+            #configuration = [{'name': k, 'value': v} for k, v in self.configuration.items()]
+            configuration = []
+
+            for k, v in self.configuration.items():
+                if k == "credentials":
+                    configuration.append({'name': k, 'value': v, 'type': 9})
+                else:
+                    configuration.append({'name': k, 'value': v})
 
             data = {
                 "name": self.name,
