@@ -221,7 +221,8 @@ class CortexXSOARSyncAccount:
 
         url = f'{self.base_url}/{url_suffix}'
 
-        response = open_url(url, method="GET", headers=self.headers, validate_certs=self.validate_certs)
+        response = open_url(url, method="GET", headers=self.headers, validate_certs=self.validate_certs,
+                            timeout=self.timeout)
         results = json.loads(response.read())
 
         if not results or not isinstance(results, list):
@@ -234,7 +235,8 @@ class CortexXSOARSyncAccount:
 
         url = f'{self.base_url}/{url_suffix}'
 
-        response = open_url(url, method="POST", headers=self.headers, data="", validate_certs=self.validate_certs)
+        response = open_url(url, method="POST", headers=self.headers, data="", validate_certs=self.validate_certs,
+                            timeout=self.timeout)
         results = json.loads(response.read())
 
         return results

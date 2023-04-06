@@ -4,13 +4,21 @@ Cortex XSOAR Collection Release Notes
 
 .. contents:: Topics
 
-v1.1.2
+v1.1.3
 ======
-
-- xsoar_multi_tenant_sync_account - Remove debug statements
 
 Bugfixes
 --------
+
+- xsoar_multi_tenant_sync_account - Add timeout to get_account_items_to_sync
+
+v1.1.2
+======
+
+Bugfixes
+--------
+
+- xsoar_multi_tenant_sync_account - Remove debug statements
 
 v1.1.1
 ======
