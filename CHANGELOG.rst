@@ -4,6 +4,14 @@ Cortex XSOAR Collection Release Notes
 
 .. contents:: Topics
 
+v1.1.5
+======
+
+Updated Modules
+-----------
+
+- xsoar_list - Added support for setting permissions
+
 v1.1.4
 ======
 

@@ -50,6 +50,14 @@ options:
         required: false
         type: list
         default: ["all"]
+    read_roles:
+        description: Roles to set Read Only permissions
+        required: false
+        type: list
+    edit_roles:
+        description: Roles to set Read and edit permissions
+        required: false
+        type: list
     state:
         description: The state the configuration should be left in.
         required: true
@@ -108,6 +116,21 @@ EXAMPLES = r'''
     url: "https://xsoar.org"
     api_key: "47A424BF668FD7BF0443184314104BC3"
     key: "71F9CAC0D57544C7C7DFB78BE50FC96A"
+    
+# Create a Text list with permissions from a file in an account in a Palo Alto Cortex XSOAR multi-tenant environment
+- name: Create Configuration Text list in account Client01
+  cortex.xsoar.xsoar_list:
+    name: "Configuration"
+    content_type: Text
+    content: "{{lookup('ansible.builtin.file', '../files/Configuration.txt')}}"
+    read_roles: 
+      - "Analyst"
+    edit_roles:
+      - "Administrator"
+    account: "Client01"
+    url: "https://xsoar.org"
+    api_key: "47A424BF668FD7BF0443184314104BC3"
+    key: "71F9CAC0D57544C7C7DFB78BE50FC96A"
 
 # Remove a list in Palo Alto Cortex XSOAR
 - name: Remove list "List01"
@@ -145,6 +168,8 @@ class CortexXSOARList:
             "Accept": "application/json",
             "Content-Type": "application/json"
         }
+        self.read_roles = module.params['read_roles']
+        self.edit_roles = module.params['edit_roles']
 
     def exists(self):
         url_suffix = 'lists'
@@ -189,6 +214,12 @@ class CortexXSOARList:
                 if not json.loads(xsoar_list.get('data')) == self.json_content:
                     return False
 
+        if not xsoar_list.get('xsoarReadOnlyRoles') == self.read_roles:
+            return False
+
+        if not xsoar_list.get('xsoarReadOnlyRoles') == self.edit_roles:
+            return False
+
         return True
 
     def add(self):
@@ -215,6 +246,16 @@ class CortexXSOARList:
             "type": self.content_type,
             "description": self.description
         }
+
+        if self.read_roles:
+            data.update({'xsoarReadOnlyRoles': self.read_roles, "allRead": False})
+        else:
+            data.update({"allRead": True})
+
+        if self.edit_roles:
+            data.update({'roles': self.edit_roles, "allReadWrite": False})
+        else:
+            data.update({"allReadWrite": True})
 
         json_data = json.dumps(data, ensure_ascii=False)
 
@@ -260,7 +301,9 @@ def run_module():
             description=dict(type='str'),
             propagation_labels=dict(type='list', default=["all"]),
             account=dict(type='str'),
-            validate_certs=dict(type='bool', default=True)
+            validate_certs=dict(type='bool', default=True),
+            read_roles=dict(type='list'),
+            edit_roles=dict(type='list')
         ),
         supports_check_mode=True,
         mutually_exclusive=[
