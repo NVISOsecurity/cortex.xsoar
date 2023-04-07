@@ -18,6 +18,7 @@ version_added: "1.0.0"
 description: Create an integration instance in Palo Alto Cortex XSOAR
 notes:
   - Tested against Palo Alto Cortex XSOAR 6.10 (B187344).
+  - Editing integration parameters of type 9 is not support once the integration instance has been created
 options:
     name:
         description: Name of the API Key.
@@ -214,7 +215,7 @@ class CortexXSOARIntegration:
 
             for i, config_item in enumerate(self.raw_instance['data']):
                 for k, v in self.configuration.items():
-                    if config_item.get('name') == k:
+                    if config_item.get('name') == k and config_item.get('type') != 9:
                         configuration[i]['value'] = v
 
             self.raw_instance['version'] = -1
@@ -234,11 +235,10 @@ class CortexXSOARIntegration:
                 return 1, f"Failed to update integration instance {self.name}", f"Error updating integration instance: {str(e)}"
 
         else:
-            #configuration = [{'name': k, 'value': v} for k, v in self.configuration.items()]
             configuration = []
 
             for k, v in self.configuration.items():
-                if k == "credentials":
+                if isinstance(v, dict) and v.get('password'):
                     configuration.append({'name': k, 'value': v, 'type': 9})
                 else:
                     configuration.append({'name': k, 'value': v})

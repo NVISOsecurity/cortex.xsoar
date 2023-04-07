@@ -4,6 +4,14 @@ Cortex XSOAR Collection Release Notes
 
 .. contents:: Topics
 
+v1.1.4
+======
+
+Bugfixes
+--------
+
+- xsoar_integration -  Fixed issue with type 9 parameters.
+
 v1.1.3
 ======
 
@@ -26,7 +34,7 @@ v1.1.1
 Bugfixes
 --------
 
-- xsoar_integration -  Fix test button issue with type 9 parameters.
+- xsoar_integration -  Fixed issue with type 9 parameters.
 
 v1.1.0
 ======
