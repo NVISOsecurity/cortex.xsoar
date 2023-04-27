@@ -132,7 +132,7 @@ class CortexXSOARSyncAccount:
                         and account_items_to_sync.get('remove'):
                     self.accounts_items_to_sync.update({account: account_items_to_sync})
         elif self.all_accounts is True:
-            self.accounts = self.get_account_list()
+            self.accounts = self.get_running_accounts_list()
 
         if self.all_items is not True and self.accounts and isinstance(self.accounts, list) \
                 and self.items and isinstance(self.items, list):
@@ -216,7 +216,7 @@ class CortexXSOARSyncAccount:
             except Exception as e:
                 return 1, f"Failed to sync accounts", f"Error syncing account: {str(e)}"
 
-    def get_account_list(self) -> list:
+    def get_running_accounts_list(self) -> list:
         url_suffix = "accounts"
 
         url = f'{self.base_url}/{url_suffix}'
@@ -225,10 +225,15 @@ class CortexXSOARSyncAccount:
                             timeout=self.timeout)
         results = json.loads(response.read())
 
-        if not results or not isinstance(results, list):
-            return []
+        accounts = []
 
-        return [account.get('displayName') for account in results if isinstance(account, dict)]
+        if results and isinstance(results, list):
+            for account in results:
+                if isinstance(account, dict):
+                    if (host_states := account.get('hostStates')) and isinstance(host_states, dict) and 'ready' in host_states.values():
+                        accounts.append(account.get('displayName'))
+
+        return accounts
 
     def get_account_items_to_sync(self, account: str) -> dict:
         url_suffix = f"account/content/diff/{account}"

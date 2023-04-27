@@ -4,6 +4,14 @@ Cortex XSOAR Collection Release Notes
 
 .. contents:: Topics
 
+v1.1.6
+======
+
+Bugfixes
+--------
+
+- xsoar_multi_tenant_sync_account -  Fixed issue when account is down
+
 v1.1.5
 ======
 

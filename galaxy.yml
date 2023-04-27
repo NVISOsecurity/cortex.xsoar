@@ -1,7 +1,7 @@
 namespace: "cortex"
 name: "xsoar"
 description: "Ansible Collection to help automate the management of Palo Alto Cortex XSOAR"
-version: "1.1.5"
+version: "1.1.6"
 readme: "README.md"
 authors:
     - "Wouter Stinkens (@wstinkens)"
