@@ -231,7 +231,7 @@ class CortexXSOARList:
             url = f'{self.base_url}/{url_suffix}'
 
         if self.content_type == "JSON":
-            content = json.dumps(self.json_content)
+            content = json.dumps(self.json_content, indent=2)
         else:
             content = self.content
 
