@@ -4,6 +4,14 @@ Cortex XSOAR Collection Release Notes
 
 .. contents:: Topics
 
+v1.1.7
+======
+
+Updated Modules
+--------
+
+- xsoar_list - When creating or updating a JSON list, this is now indented properly
+
 v1.1.6
 ======
 
