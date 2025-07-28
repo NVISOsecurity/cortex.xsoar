@@ -149,6 +149,9 @@ class CortexXSOARIntegration:
         }
         self.id = None
         self.raw_instance = None
+        self.mapper_name = module.params['mapper_name']
+        self.mapping_definitions = module.params['mapping_definitions']
+        self.transformation_rules = module.params['transformation_rules']
 
     def exists(self):
         url_suffix = 'settings/integration/search'
@@ -230,6 +233,10 @@ class CortexXSOARIntegration:
             try:
                 if not self.module.check_mode:
                     open_url(url, method="PUT", headers=self.headers, data=json_data, validate_certs=self.validate_certs)
+
+                    if self.mapper_name and self.mapping_definitions:
+                        self.configure_mapper(self.mapper_name, self.mapping_definitions, self.transformation_rules)
+                        
                 return 0, f"Integration instance {self.name} updated in Palo Alto Cortex XSOAR", ""
             except Exception as e:
                 return 1, f"Failed to update integration instance {self.name}", f"Error updating integration instance: {str(e)}"
@@ -261,6 +268,10 @@ class CortexXSOARIntegration:
             try:
                 if not self.module.check_mode:
                     open_url(url, method="PUT", headers=self.headers, data=json_data, validate_certs=self.validate_certs)
+
+                    if self.mapper_name and self.mapping_definitions:
+                        self.configure_mapper(self.mapper_name, self.mapping_definitions, self.transformation_rules)
+
                 return 0, f"Integration instance {self.name} created in Palo Alto Cortex XSOAR", ""
             except Exception as e:
                 return 1, f"Failed to create integration instance {self.name}", f"Error creating integration instance: {str(e)}"
@@ -280,6 +291,33 @@ class CortexXSOARIntegration:
         except Exception as e:
             return 1, f"Failed to delete integration instance {self.name}", f"Error deleting integration instance: {str(e)}"
 
+    def configure_mapper(self, mapper_name, mapping_definitions, transformation_rules):
+        # Define the URL for mapper configuration
+        mapper_url_suffix = "settings/mapper"
+
+        if self.account:
+            mapper_url = f'{self.base_url}/acc_{self.account}/{mapper_url_suffix}'
+        else:
+            mapper_url = f'{self.base_url}/{mapper_url_suffix}'
+
+        # Prepare the data for mapper configuration
+        mapper_data = {
+            "name": mapper_name,
+            "mapping": mapping_definitions,
+            "transformation": transformation_rules
+        }
+
+        # Convert the data to JSON format
+        json_mapper_data = json.dumps(mapper_data, ensure_ascii=False)
+
+        try:
+            # Make an API call to configure the mapper
+            if not self.module.check_mode:
+                open_url(mapper_url, method="PUT", headers=self.headers, data=json_mapper_data, validate_certs=self.validate_certs)
+            print(f"Mapper {mapper_name} configured successfully.")
+        except Exception as e:
+            print(f"Failed to configure mapper {mapper_name}: {str(e)}")
+
 
 def run_module():
     module = AnsibleModule(
@@ -294,7 +332,12 @@ def run_module():
             state=dict(type='str', choices=['absent', 'present'], default='present'),
             propagation_labels=dict(type='list'),
             account=dict(type='str'),
-            validate_certs=dict(type='bool', default=True)
+            validate_certs=dict(type='bool', default=True),
+            # New parameters for mapper support
+            mapper_name=dict(type='str', required=False),
+            mapping_definitions=dict(type='dict', required=False),
+            transformation_rules=dict(type='dict', required=False),
+            mirror_direction=dict(type='str', choices=['incoming', 'outgoing', 'both'], required=False)
         ),
         supports_check_mode=True
     )
