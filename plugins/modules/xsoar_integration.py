@@ -248,6 +248,13 @@ class CortexXSOARIntegration:
                 else:
                     configuration.append({'name': k, 'value': v})
 
+            if self.mapper_name: # Try to find an existing mapper field in the configuration list 
+                mapper_field = next((item for item in configuration if item.get('name') == "Mapper(Incoming)"), None) 
+            if mapper_field: # If it exists, update its value 
+                mapper_field['value'] = self.mapper_name 
+            else: # If it doesn't exist, append it as a new configuration item 
+                configuration.append({ "name": "Mapper(Incoming)", "value": self.mapper_name, "type": 4})
+
             data = {
                 "name": self.name,
                 "enabled": str(self.enabled).lower(),
@@ -267,8 +274,8 @@ class CortexXSOARIntegration:
                 if not self.module.check_mode:
                     open_url(url, method="PUT", headers=self.headers, data=json_data, validate_certs=self.validate_certs)
 
-                    if self.mapper_name and self.mapping_definitions:
-                        self.configure_mapper(self.mapper_name, self.mapping_definitions, self.transformation_rules)
+                    #if self.mapper_name and self.mapping_definitions:
+                        #self.configure_mapper(self.mapper_name, self.mapping_definitions, self.transformation_rules)
 
                 return 0, f"Integration instance {self.name} created in Palo Alto Cortex XSOAR", ""
             except Exception as e:
@@ -288,7 +295,7 @@ class CortexXSOARIntegration:
             return 0, f"Integration instance {self.name} deleted in Palo Alto Cortex XSOAR", ""
         except Exception as e:
             return 1, f"Failed to delete integration instance {self.name}", f"Error deleting integration instance: {str(e)}"
-
+    """
     def configure_mapper(self, mapper_name):
         # Define the URL for mapper configuration
         mapper_url_suffix = "settings/mapper"
@@ -313,6 +320,7 @@ class CortexXSOARIntegration:
             print(f"Mapper {mapper_name} configured successfully.")
         except Exception as e:
             print(f"Failed to configure mapper {mapper_name}: {str(e)}")
+    """
 
 
 def run_module():
