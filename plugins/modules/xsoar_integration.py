@@ -150,8 +150,6 @@ class CortexXSOARIntegration:
         self.id = None
         self.raw_instance = None
         self.mapper_name = module.params['mapper_name']
-        self.mapping_definitions = module.params['mapping_definitions']
-        self.transformation_rules = module.params['transformation_rules']
 
     def exists(self):
         url_suffix = 'settings/integration/search'
@@ -234,8 +232,8 @@ class CortexXSOARIntegration:
                 if not self.module.check_mode:
                     open_url(url, method="PUT", headers=self.headers, data=json_data, validate_certs=self.validate_certs)
 
-                    if self.mapper_name and self.mapping_definitions:
-                        self.configure_mapper(self.mapper_name, self.mapping_definitions, self.transformation_rules)
+                    if self.mapper_name:
+                        self.configure_mapper(self.mapper_name)
                         
                 return 0, f"Integration instance {self.name} updated in Palo Alto Cortex XSOAR", ""
             except Exception as e:
@@ -291,7 +289,7 @@ class CortexXSOARIntegration:
         except Exception as e:
             return 1, f"Failed to delete integration instance {self.name}", f"Error deleting integration instance: {str(e)}"
 
-    def configure_mapper(self, mapper_name, mapping_definitions, transformation_rules):
+    def configure_mapper(self, mapper_name):
         # Define the URL for mapper configuration
         mapper_url_suffix = "settings/mapper"
 
@@ -302,9 +300,7 @@ class CortexXSOARIntegration:
 
         # Prepare the data for mapper configuration
         mapper_data = {
-            "name": mapper_name,
-            "mapping": mapping_definitions,
-            "transformation": transformation_rules
+            "name": mapper_name
         }
 
         # Convert the data to JSON format
@@ -337,7 +333,6 @@ def run_module():
             mapper_name=dict(type='str', required=False),
             mapping_definitions=dict(type='dict', required=False),
             transformation_rules=dict(type='dict', required=False),
-            mirror_direction=dict(type='str', choices=['incoming', 'outgoing', 'both'], required=False)
         ),
         supports_check_mode=True
     )
