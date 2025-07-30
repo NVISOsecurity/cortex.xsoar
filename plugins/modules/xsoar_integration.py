@@ -149,7 +149,7 @@ class CortexXSOARIntegration:
         }
         self.id = None
         self.raw_instance = None
-        self.mapper_name = module.params['mapper_name']
+        self.incomingMapperId = module.params['incomingMapperId']
 
     def exists(self):
         url_suffix = 'settings/integration/search'
@@ -223,6 +223,7 @@ class CortexXSOARIntegration:
             self.raw_instance['defaultIgnore'] = self.default_ignore or self.raw_instance['defaultIgnore']
             self.raw_instance['enabled'] = str(self.enabled).lower()
             self.raw_instance['data'] = configuration
+            self.raw_instance['incomingMapperId'] = self.incomingMapperId
 
             data = self.raw_instance
 
@@ -232,9 +233,6 @@ class CortexXSOARIntegration:
                 if not self.module.check_mode:
                     open_url(url, method="PUT", headers=self.headers, data=json_data, validate_certs=self.validate_certs)
 
-                    if self.mapper_name:
-                        self.configure_mapper(self.mapper_name)
-                        
                 return 0, f"Integration instance {self.name} updated in Palo Alto Cortex XSOAR", ""
             except Exception as e:
                 return 1, f"Failed to update integration instance {self.name}", f"Error updating integration instance: {str(e)}"
@@ -248,13 +246,6 @@ class CortexXSOARIntegration:
                 else:
                     configuration.append({'name': k, 'value': v})
 
-            if self.mapper_name: # Try to find an existing mapper field in the configuration list 
-                mapper_field = next((item for item in configuration if item.get('name') == "Mapper(Incoming)"), None) 
-            if mapper_field: # If it exists, update its value 
-                mapper_field['value'] = self.mapper_name 
-            else: # If it doesn't exist, append it as a new configuration item 
-                configuration.append({ "name": "Mapper(Incoming)", "value": self.mapper_name, "type": 4})
-
             data = {
                 "name": self.name,
                 "enabled": str(self.enabled).lower(),
@@ -262,7 +253,8 @@ class CortexXSOARIntegration:
                 "brand": self.brand,
                 "version": 0,
                 "isIntegrationScript": True,
-                "defaultIgnore": self.default_ignore
+                "defaultIgnore": self.default_ignore,
+                "incomingMapperId": self.incomingMapperId
             }
 
             if self.propagation_labels:
@@ -273,9 +265,6 @@ class CortexXSOARIntegration:
             try:
                 if not self.module.check_mode:
                     open_url(url, method="PUT", headers=self.headers, data=json_data, validate_certs=self.validate_certs)
-
-                    #if self.mapper_name and self.mapping_definitions:
-                        #self.configure_mapper(self.mapper_name, self.mapping_definitions, self.transformation_rules)
 
                 return 0, f"Integration instance {self.name} created in Palo Alto Cortex XSOAR", ""
             except Exception as e:
@@ -295,32 +284,7 @@ class CortexXSOARIntegration:
             return 0, f"Integration instance {self.name} deleted in Palo Alto Cortex XSOAR", ""
         except Exception as e:
             return 1, f"Failed to delete integration instance {self.name}", f"Error deleting integration instance: {str(e)}"
-    """
-    def configure_mapper(self, mapper_name):
-        # Define the URL for mapper configuration
-        mapper_url_suffix = "settings/mapper"
 
-        if self.account:
-            mapper_url = f'{self.base_url}/acc_{self.account}/{mapper_url_suffix}'
-        else:
-            mapper_url = f'{self.base_url}/{mapper_url_suffix}'
-
-        # Prepare the data for mapper configuration
-        mapper_data = {
-            "name": mapper_name
-        }
-
-        # Convert the data to JSON format
-        json_mapper_data = json.dumps(mapper_data, ensure_ascii=False)
-
-        try:
-            # Make an API call to configure the mapper
-            if not self.module.check_mode:
-                open_url(mapper_url, method="PUT", headers=self.headers, data=json_mapper_data, validate_certs=self.validate_certs)
-            print(f"Mapper {mapper_name} configured successfully.")
-        except Exception as e:
-            print(f"Failed to configure mapper {mapper_name}: {str(e)}")
-    """
 
 
 def run_module():
@@ -337,10 +301,8 @@ def run_module():
             propagation_labels=dict(type='list'),
             account=dict(type='str'),
             validate_certs=dict(type='bool', default=True),
-            # New parameters for mapper support
-            mapper_name=dict(type='str', required=False),
-            mapping_definitions=dict(type='dict', required=False),
-            transformation_rules=dict(type='dict', required=False),
+            incomingMapperId=dict(type='str', required=False),
+
         ),
         supports_check_mode=True
     )
