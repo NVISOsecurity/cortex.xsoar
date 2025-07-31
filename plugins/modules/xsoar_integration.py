@@ -42,6 +42,10 @@ options:
         description: Key/Value pairs of configuration options of the integration instance
         required: true
         type: dict
+    incoming_mapper_id:
+        description: The id of the incomming mapper that should be added to the integration if needed.
+        required: false
+        type: str
     state:
         description: The state the configuration should be left in.
         required: true
