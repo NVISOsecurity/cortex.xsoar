@@ -190,6 +190,9 @@ class CortexXSOARIntegration:
 
         if not xsoar_integration_instance.get('brand') == self.brand:
             return False
+        
+        if not xsoar_integration_instance.get('incomingMapperId') == self.incomingMapperId:
+            return False
 
         for k, v in self.configuration.items():
             if not (config_items := [c for c in xsoar_integration_instance.get('data') if c.get('name') == k]) \
