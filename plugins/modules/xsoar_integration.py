@@ -232,7 +232,6 @@ class CortexXSOARIntegration:
             try:
                 if not self.module.check_mode:
                     open_url(url, method="PUT", headers=self.headers, data=json_data, validate_certs=self.validate_certs)
-
                 return 0, f"Integration instance {self.name} updated in Palo Alto Cortex XSOAR", ""
             except Exception as e:
                 return 1, f"Failed to update integration instance {self.name}", f"Error updating integration instance: {str(e)}"
@@ -265,7 +264,6 @@ class CortexXSOARIntegration:
             try:
                 if not self.module.check_mode:
                     open_url(url, method="PUT", headers=self.headers, data=json_data, validate_certs=self.validate_certs)
-
                 return 0, f"Integration instance {self.name} created in Palo Alto Cortex XSOAR", ""
             except Exception as e:
                 return 1, f"Failed to create integration instance {self.name}", f"Error creating integration instance: {str(e)}"
@@ -286,7 +284,6 @@ class CortexXSOARIntegration:
             return 1, f"Failed to delete integration instance {self.name}", f"Error deleting integration instance: {str(e)}"
 
 
-
 def run_module():
     module = AnsibleModule(
         argument_spec=dict(
@@ -302,7 +299,6 @@ def run_module():
             account=dict(type='str'),
             validate_certs=dict(type='bool', default=True),
             incomingMapperId=dict(type='str', required=False),
-
         ),
         supports_check_mode=True
     )
