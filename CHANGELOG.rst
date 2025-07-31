@@ -4,6 +4,14 @@ Cortex XSOAR Collection Release Notes
 
 .. contents:: Topics
 
+v1.1.8
+======
+
+Updated Modules
+--------
+
+- xsoar_integration - Added the functionality to support the addition of an incomming mapper.
+
 v1.1.7
 ======
 
