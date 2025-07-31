@@ -149,7 +149,7 @@ class CortexXSOARIntegration:
         }
         self.id = None
         self.raw_instance = None
-        self.incomingMapperId = module.params['incomingMapperId']
+        self.incoming_mapper_id = module.params['incomingMapperId']
 
     def exists(self):
         url_suffix = 'settings/integration/search'
@@ -191,7 +191,7 @@ class CortexXSOARIntegration:
         if not xsoar_integration_instance.get('brand') == self.brand:
             return False
         
-        if not xsoar_integration_instance.get('incomingMapperId') == self.incomingMapperId:
+        if not xsoar_integration_instance.get('incomingMapperId') == self.incoming_mapper_id:
             return False
 
         for k, v in self.configuration.items():
@@ -226,7 +226,7 @@ class CortexXSOARIntegration:
             self.raw_instance['defaultIgnore'] = self.default_ignore or self.raw_instance['defaultIgnore']
             self.raw_instance['enabled'] = str(self.enabled).lower()
             self.raw_instance['data'] = configuration
-            self.raw_instance['incomingMapperId'] = self.incomingMapperId
+            self.raw_instance['incomingMapperId'] = self.incoming_mapper_id
 
             data = self.raw_instance
 
@@ -256,7 +256,7 @@ class CortexXSOARIntegration:
                 "version": 0,
                 "isIntegrationScript": True,
                 "defaultIgnore": self.default_ignore,
-                "incomingMapperId": self.incomingMapperId
+                "incomingMapperId": self.incoming_mapper_id
             }
 
             if self.propagation_labels:
