@@ -42,6 +42,10 @@ options:
         description: Key/Value pairs of configuration options of the integration instance
         required: true
         type: dict
+    incoming_mapper_id:
+        description: The id of the incomming mapper that should be added to the integration if needed.
+        required: false
+        type: str
     state:
         description: The state the configuration should be left in.
         required: true
@@ -149,6 +153,7 @@ class CortexXSOARIntegration:
         }
         self.id = None
         self.raw_instance = None
+        self.incoming_mapper_id = module.params['incomingMapperId']
 
     def exists(self):
         url_suffix = 'settings/integration/search'
@@ -189,6 +194,9 @@ class CortexXSOARIntegration:
 
         if not xsoar_integration_instance.get('brand') == self.brand:
             return False
+        
+        if not xsoar_integration_instance.get('incomingMapperId') == self.incoming_mapper_id:
+            return False
 
         for k, v in self.configuration.items():
             if not (config_items := [c for c in xsoar_integration_instance.get('data') if c.get('name') == k]) \
@@ -222,6 +230,7 @@ class CortexXSOARIntegration:
             self.raw_instance['defaultIgnore'] = self.default_ignore or self.raw_instance['defaultIgnore']
             self.raw_instance['enabled'] = str(self.enabled).lower()
             self.raw_instance['data'] = configuration
+            self.raw_instance['incomingMapperId'] = self.incoming_mapper_id
 
             data = self.raw_instance
 
@@ -250,7 +259,8 @@ class CortexXSOARIntegration:
                 "brand": self.brand,
                 "version": 0,
                 "isIntegrationScript": True,
-                "defaultIgnore": self.default_ignore
+                "defaultIgnore": self.default_ignore,
+                "incomingMapperId": self.incoming_mapper_id
             }
 
             if self.propagation_labels:
@@ -294,7 +304,8 @@ def run_module():
             state=dict(type='str', choices=['absent', 'present'], default='present'),
             propagation_labels=dict(type='list'),
             account=dict(type='str'),
-            validate_certs=dict(type='bool', default=True)
+            validate_certs=dict(type='bool', default=True),
+            incomingMapperId=dict(type='str', required=False),
         ),
         supports_check_mode=True
     )
