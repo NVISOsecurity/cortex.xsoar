@@ -305,7 +305,7 @@ def run_module():
             propagation_labels=dict(type='list'),
             account=dict(type='str'),
             validate_certs=dict(type='bool', default=True),
-            incoming_mapper_id=dict(type='str', required=False),
+            incomingMapperId=dict(type='str', required=False),
         ),
         supports_check_mode=True
     )
